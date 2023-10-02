@@ -6,26 +6,107 @@
     <title>Enhanced index of 
 	<?php $path = getcwd(); $relativePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $path); echo $relativePath;?></title>
     <style>
+        @media only screen and (max-device-width: 400px) {
+            .text {
+                width: 90%;
+                padding-left: 5%;
+            }
+
+            h1 {
+                font-size: 18px;
+            }
+
+            ul {
+                justify-content: center;
+            }
+
+            .file, .folder {
+                margin: 2.5vw;
+                width: 145px;
+                padding: 125px 0 0 5px;
+			    font-size: 14px;
+            }
+        }
+
+        @media only screen and (min-device-width: 401px) and (max-device-width: 649px) {
+            .text {
+                width: 90%;
+                padding-left: 5%;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            ul {
+                justify-content: center;
+            }
+
+            .file, .folder {
+                margin: 2.5vw;
+                width: 170px;
+                padding: 150px 0 0 5px;
+			    font-size: 16px;
+            }
+        }
+
+        @media only screen and (min-device-width: 650px) {
+            .text {
+                width: 98%;
+                padding-left: 1%;
+            }
+
+            h1 {
+			    font-size: 24px;
+            }
+
+            .file, .folder {
+                margin: 0.5vw;
+                width: 165px;
+                padding: 145px 0 0 5px;
+			    font-size: 16.5px;
+            }
+
+        }
+
         body {
+            overflow-x: hidden;
+            overflow-y: auto;
             background-color: #eee;
+            color: #000;
+        }
+
+        .title {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 12px 0 6px 0;
+        }
+
+        .text{
+            background-color: #fff;
+			border-radius: 12px;
+			box-shadow: 2px 2px 4px #00000040;
         }
 		
 		h1 {
 			font-family: "Bahnschrift";
-			font-size: 24px;
 			font-weight: normal;
-			width: 98%;
-			background-color: #fff;
-			border-radius: 8px;
-			margin: 20px 0 10px 10px;
-			padding-left: 20px;
-			line-height: 60px;
 			vertical-align: middle;
-			height: 60px;
-			box-shadow: 2px 2px 4px #00000040;
+            line-height: 1.2em;
+            white-space: nowrap;
+			overflow: hidden;
 		}
 
         .directory-listing {
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+        ul {
             list-style-type: none;
             padding: 0;
             display: flex;
@@ -39,16 +120,16 @@
         }
 
         .image{
-            background-color: #ddd;
+            background-color: #ccc;
             background-size: cover;
         }
 		
         .image:hover{
-            background-color: #aaa;
+            background-color: #999;
             scale: 1.08;
         }
 
-        .text{
+        .document{
 			background-image: url('data:image/svg+xml;utf8,<svg enable-background="new 0 0 48 48" height="48px" id="Layer_1" version="1.1" viewBox="0 0 48 48" width="48px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path clip-rule="evenodd" d="M37,47H11c-2.209,0-4-1.791-4-4V5c0-2.209,1.791-4,4-4h18.973  c0.002,0,0.005,0,0.007,0h0.02H30c0.32,0,0.593,0.161,0.776,0.395l9.829,9.829C40.84,11.407,41,11.68,41,12l0,0v0.021  c0,0.002,0,0.003,0,0.005V43C41,45.209,39.209,47,37,47z M31,4.381V11h6.619L31,4.381z M39,13h-9c-0.553,0-1-0.448-1-1V3H11  C9.896,3,9,3.896,9,5v38c0,1.104,0.896,2,2,2h26c1.104,0,2-0.896,2-2V13z M33,39H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18  c0.553,0,1,0.448,1,1C34,38.553,33.553,39,33,39z M33,31H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18c0.553,0,1,0.448,1,1  C34,30.553,33.553,31,33,31z M33,23H15c-0.553,0-1-0.447-1-1c0-0.552,0.447-1,1-1h18c0.553,0,1,0.448,1,1C34,22.553,33.553,23,33,23  z" fill-rule="evenodd"/></svg>');
 		}
 		
@@ -61,36 +142,30 @@
         }
 
         .unknown{
-            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"> <path clip-rule="evenodd" d="M 37 47 L 11 47 C 8.791 47 7 45.209 7 43 L 7 5 C 7 2.791 8.791 1 11 1 L 29.973 1 C 29.975 1 29.978 1 29.98 1 L 30 1 C 30.32 1 30.593 1.161 30.776 1.395 L 40.605 11.224 C 40.84 11.407 41 11.68 41 12 L 41 12.021 C 41 12.023 41 12.024 41 12.026 L 41 43 C 41 45.209 39.209 47 37 47 Z M 31 4.381 L 31 11 L 37.619 11 L 31 4.381 Z M 39 13 L 30 13 C 29.447 13 29 12.552 29 12 L 29 3 L 11 3 C 9.896 3 9 3.896 9 5 L 9 43 C 9 44.104 9.896 45 11 45 L 37 45 C 38.104 45 39 44.104 39 43 L 39 13 Z" fill-rule="evenodd"/><text style="font-family: Dubai; font-size: 32px; white-space: pre;" x="16.886" y="36.271">?</text></svg>');
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"> <path clip-rule="evenodd" d="M 37 47 L 11 47 C 8.791 47 7 45.209 7 43 L 7 5 C 7 2.791 8.791 1 11 1 L 29.973 1 C 29.975 1 29.978 1 29.98 1 L 30 1 C 30.32 1 30.593 1.161 30.776 1.395 L 40.605 11.224 C 40.84 11.407 41 11.68 41 12 L 41 12.021 C 41 12.023 41 12.024 41 12.026 L 41 43 C 41 45.209 39.209 47 37 47 Z M 31 4.381 L 31 11 L 37.619 11 L 31 4.381 Z M 39 13 L 30 13 C 29.447 13 29 12.552 29 12 L 29 3 L 11 3 C 9.896 3 9 3.896 9 5 L 9 43 C 9 44.104 9.896 45 11 45 L 37 45 C 38.104 45 39 44.104 39 43 L 39 13 Z" fill-rule="evenodd"/><document style="font-family: Dubai; font-size: 32px; white-space: pre;" x="16.886" y="36.271">?</document></svg>');
         }
 		
-        .text, .video, .music, .unknown, .folder{
+        .document, .video, .music, .unknown, .folder{
 			background-size: 70%;
 			background-repeat: no-repeat;
 			background-position: center 33%;
         }
 		
-        .text:hover, .video:hover, .music:hover, .unknown:hover, .folder:hover{
+        .document:hover, .video:hover, .music:hover, .unknown:hover, .folder:hover{
             background-color: #fff;
             scale: 1.08;
         }
 
         .file, .folder {
-			line-width: 150px;
 			line-height: 25px;
 			white-space: nowrap;
-			text-overflow: ellipsis;
 			overflow: hidden;
-			font-size: 16px;
-            margin: 10px;
-            border-radius: 8px;
+            border-radius: 12px;
             font-family: "Bahnschrift";
             cursor: pointer;
             vertical-align: middle;
             cursor: pointer;
-            width: 150px;
             height: 25px;
-            padding: 130px 0 0 5px;
 			box-shadow: 2px 2px 4px #00000040;
         }
 
@@ -111,7 +186,7 @@
 			font-size: 12px;
 			font-family: "Bahnschrift";
 			padding: 5px;
-			border-radius: 4px;
+			border-radius: 5px;
 			z-index: 9999;
 			pointer-events: none;
 		}
@@ -160,11 +235,15 @@
 			}
 		}
     </script>
-    </head>
-    <body>
-		<h1><B>Enhanced index of</B>
-		<?php $path = getcwd(); $relativePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $path); echo $relativePath;?></h1>
-        <ul class="directory-listing">
+</head>
+<body>
+    <div class="title">
+        <div class="text">
+            <h1><B>Enhanced index of </B><?php $path = getcwd(); $relativePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $path); echo $relativePath;?></h1>
+        </div>
+    </div>
+    <div class="directory-listing">
+        <ul>
             <?php
             $files = scandir('./');
             
@@ -179,38 +258,39 @@
                     }
                 }
             }
-			
+            
             foreach($folders as $folder){
-				$size = filesize($folder);
-				$modTime = date("M d Y H:i:s", filemtime($folder));
-				$escapedFolderName = htmlspecialchars($folder, ENT_QUOTES, 'UTF-8');
-                echo "<li class='folder' onclick='openFile(\"{$folder}\")' onmouseover='showFileInfo(event, \"{$modTime}\", \"none\", \"{$escapedFolderName}\")' onmouseout='hideFileInfo()'>$folder</li>";
+                $size = filesize($folder);
+                $modTime = date("M d Y H:i:s", filemtime($folder));
+                $escapedFolderName = htmlspecialchars($folder, ENT_QUOTES, 'UTF-8');
+                echo "<li class='folder' onclick='openFile(\"{$escapedFolderName}\")' onmouseover='showFileInfo(event, \"{$modTime}\", \"none\", \"{$escapedFolderName}\")' onmouseout='hideFileInfo()'>$folder</li>";
             }
             
             foreach($filesList as $file){
-				$filePath = "{$folder}/{$file}";
-				$escapedFileName = htmlspecialchars($file, ENT_QUOTES, 'UTF-8');
-				$fileName = pathinfo($escapedFileName, PATHINFO_FILENAME);
-				$fileExtension = pathinfo($escapedFileName, PATHINFO_EXTENSION);
+                $filePath = "{$folder}/{$file}";
+                $escapedFileName = htmlspecialchars($file, ENT_QUOTES, 'UTF-8');
+                $fileName = pathinfo($escapedFileName, PATHINFO_FILENAME);
+                $fileExtension = pathinfo($escapedFileName, PATHINFO_EXTENSION);
                 
-				$size = filesize($file);
-				$modTime = date("M d Y H:i:s", filemtime($file));
-				
+                $size = filesize($file);
+                $modTime = date("M d Y H:i:s", filemtime($file));
+                
                 if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'ico', 'svg', 'webp', 'doc', 'docx', 'pdf', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'rtf', 'odt', 'mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'webm', 'mpeg', 'mpg', 'm4v', 'mp3', 'wav', 'ogg', 'flac', 'm4a', 'aac', 'wma', 'alac'])){
                     if(in_array($fileExtension, ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'ico', 'svg', 'webp'])){
-						echo "<li class='file image' data-image='{$fileName}.{$fileExtension}' onmouseover='changeGradient(this); showFileInfo(event, \"{$modTime}\", \"{$size}\", \"{$escapedFileName}\")' onmouseout='restoreGradient(this); hideFileInfo()' onclick='openFile(\"{$escapedFileName}\")' style='background-image: linear-gradient(#ffffff20, #ffffffff), url(\"{$fileName}.{$fileExtension}\"); background-size: cover; background-position: center;'>$file</li>";
-					} elseif(in_array($fileExtension, ['doc', 'docx', 'pdf', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'rtf', 'odt'])){
-						echo "<li class='file text' onmouseover='showFileInfo(event, \"{$modTime}\", \"{$size}\", \"{$escapedFileName}\")' onmouseout='hideFileInfo()' onclick='openFile(\"{$escapedFileName}\")'>$file</li>";
-					} elseif(in_array($fileExtension, ['mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'webm', 'mpeg', 'mpg', 'm4v'])){
-						echo "<li class='file video' onmouseover='showFileInfo(event, \"{$modTime}\", \"{$size}\", \"{$escapedFileName}\")' onmouseout='hideFileInfo()' onclick='openFile(\"{$escapedFileName}\")'>$file</li>";
-					} else {
-						echo "<li class='file music' onmouseover='showFileInfo(event, \"{$modTime}\", \"{$size}\", \"{$escapedFileName}\")' onmouseout='hideFileInfo()' onclick='openFile(\"{$escapedFileName}\")'>$file</li>";
-					}
-				} else {
+                        echo "<li class='file image' data-image='{$fileName}.{$fileExtension}' onmouseover='changeGradient(this); showFileInfo(event, \"{$modTime}\", \"{$size}\", \"{$escapedFileName}\")' onmouseout='restoreGradient(this); hideFileInfo()' onclick='openFile(\"{$escapedFileName}\")' style='background-image: linear-gradient(#ffffff20, #ffffffff), url(\"{$fileName}.{$fileExtension}\"); background-size: cover; background-position: center;'>$file</li>";
+                    } elseif(in_array($fileExtension, ['doc', 'docx', 'pdf', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'rtf', 'odt'])){
+                        echo "<li class='file document' onmouseover='showFileInfo(event, \"{$modTime}\", \"{$size}\", \"{$escapedFileName}\")' onmouseout='hideFileInfo()' onclick='openFile(\"{$escapedFileName}\")'>$file</li>";
+                    } elseif(in_array($fileExtension, ['mp4', 'avi', 'mkv', 'mov', 'wmv', 'flv', 'webm', 'mpeg', 'mpg', 'm4v'])){
+                        echo "<li class='file video' onmouseover='showFileInfo(event, \"{$modTime}\", \"{$size}\", \"{$escapedFileName}\")' onmouseout='hideFileInfo()' onclick='openFile(\"{$escapedFileName}\")'>$file</li>";
+                    } else {
+                        echo "<li class='file music' onmouseover='showFileInfo(event, \"{$modTime}\", \"{$size}\", \"{$escapedFileName}\")' onmouseout='hideFileInfo()' onclick='openFile(\"{$escapedFileName}\")'>$file</li>";
+                    }
+                } else {
                     echo "<li class='file unknown' onclick='openFile(\"{$escapedFileName}\")' onmouseover='showFileInfo(event, \"{$modTime}\", \"{$size}\", \"{$escapedFileName}\");' onmouseout='hideFileInfo();'>$file</li>";
                 }
             }
             ?>
         </ul>
-    </body>
+    </div>
+</body>
 </html>
